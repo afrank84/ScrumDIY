@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scrum App</title>
     <link href="style.css" rel="stylesheet">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="container">
@@ -21,29 +23,31 @@
     <div class="container">
         <h1>Task Board</h1>
         <div class="task-board">
-            <div class="column" id="todo">
+            <div class="column" id="todo" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <h2>To Do</h2>
                 <ul id="todoList" class="task-list"></ul>
             </div>
-            <div class="column" id="inProgress">
+            <div class="column" id="inProgress" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <h2>In Progress</h2>
                 <ul id="inProgressList" class="task-list"></ul>
             </div>
-            <div class="column" id="done">
+            <div class="column" id="done" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <h2>Done</h2>
                 <ul id="doneList" class="task-list"></ul>
             </div>
         </div>
+    </div>
 
-        <h2>Add a New Task</h2>
-        <form id="taskForm">
-            <input type="text" id="taskTitle" placeholder="Task Title" required>
-            <textarea id="taskDescription" placeholder="Task Description" required></textarea>
-            <button type="submit">Add Task</button>
-        </form>
+
+    <h2>Add a New Task</h2>
+    <form id="taskForm">
+        <input type="text" id="taskTitle" placeholder="Task Title" required>
+        <textarea id="taskDescription" placeholder="Task Description" required></textarea>
+        <button type="submit">Add Task</button>
+    </form>
     </div>
 
     <script src="script.js"></script>
 </body>
-</html>
 
+</html>
