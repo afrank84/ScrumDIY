@@ -79,6 +79,27 @@ class ScrumAppHTTPRequestHandler(BaseHTTPRequestHandler):
                 }).encode())
             except Exception as e:
                 self.send_error(500, str(e))
+
+        elif self.path.startswith("/update-task/"):
+            try:
+                task_id = self.path.split("/")[-1]
+                content_length = int(self.headers['Content-Length'])
+                post_data = self.rfile.read(content_length)
+                task_data = json.loads(post_data)
+
+                conn = sqlite3.connect('database.db')
+                cursor = conn.cursor()
+                cursor.execute("UPDATE tasks SET status = ? WHERE id = ?", 
+                               (task_data['status'], task_id))
+                conn.commit()
+                conn.close()
+
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "success"}).encode())
+            except Exception as e:
+                self.send_error(500, str(e))
         else:
             self.send_error(404, "API Endpoint Not Found")
 
